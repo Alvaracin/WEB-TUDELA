@@ -1,16 +1,51 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from "react";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import IntroSection from "@/components/IntroSection";
+import LevelSystem from "@/components/LevelSystem";
+import ExperienceSection from "@/components/ExperienceSection";
+import PricingSection from "@/components/PricingSection";
+import CommunitySection from "@/components/CommunitySection";
+import GallerySection from "@/components/GallerySection";
+import FAQSection from "@/components/FAQSection";
+import ContactSection from "@/components/ContactSection";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [isFloating, setIsFloating] = useState(false);
+  const [gravityTriggered, setGravityTriggered] = useState(false);
+
+  const handlePointerDown = useCallback(() => {
+    setIsFloating(true);
+    setGravityTriggered(true);
+  }, []);
+
+  const handlePointerUp = useCallback(() => {
+    setIsFloating(false);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="grain-overlay">
+      <Navbar isFloating={isFloating} />
+      <HeroSection
+        isFloating={isFloating}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        gravityTriggered={gravityTriggered}
+      />
+      <IntroSection isFloating={isFloating} />
+      <LevelSystem isFloating={isFloating} />
+      <ExperienceSection isFloating={isFloating} />
+      <PricingSection isFloating={isFloating} />
+      <CommunitySection isFloating={isFloating} />
+      <GallerySection isFloating={isFloating} />
+      <FAQSection isFloating={isFloating} />
+      <ContactSection isFloating={isFloating} />
+      <FinalCTA isFloating={isFloating} />
+      <Footer />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
