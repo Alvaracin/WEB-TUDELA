@@ -5,7 +5,7 @@ interface CommunitySectionProps {
 }
 
 const events = [
-  { title: "Noche de boulder", date: "Cada viernes", desc: "Música, bloques, y gente." },
+  { title: "Inauguración", date: "4 de septiembre", desc: "Música, bloques, y gente." },
   { title: "Sesión principiantes", date: "Sábados 10:00", desc: "Para los que acaban de aterrizar." },
   { title: "Comp mensual", date: "Último sábado del mes", desc: "Compite. O anima. Las dos valen." },
 ];
@@ -47,7 +47,7 @@ const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
         </div>
 
         <h2 className={`reveal font-mono text-2xl md:text-3xl font-bold text-foreground mb-12 text-center gravity-layer-text ${f}`}>
-          Qué pasa esta semana
+          ¿Qué pasará en el futuro próximo?
         </h2>
 
         <div className="space-y-4">

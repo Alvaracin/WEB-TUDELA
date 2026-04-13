@@ -8,13 +8,13 @@ interface ExperienceSectionProps {
 const experiences = [
   {
     icon: Mountain,
-    title: "Búlder",
-    desc: "Bloques para todos los niveles. Rotación semanal. Sin cuerdas, sin excusas.",
+    title: "Boulder",
+    desc: "Bloques para todos los niveles. Rotación semanal.\nSin cuerdas, sin excusas.",
   },
   {
     icon: Dumbbell,
     title: "Entrenamiento",
-    desc: "Zona de entrenamiento específico. Campus, hangboard, Moonboard a 40º y todo lo que necesitas para apretar.",
+    desc: "Zona de entrenamiento específico. Campus, hangboard, Moonboard a 40º y todo lo que necesitas para apretar.",
   },
   {
     icon: Users,
@@ -73,7 +73,7 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
               <h3 className="font-mono text-xl font-bold text-foreground mb-2">
                 {exp.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">
                 {exp.desc}
               </p>
             </div>
