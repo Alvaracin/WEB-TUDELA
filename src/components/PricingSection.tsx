@@ -57,7 +57,7 @@ const PricingSection = ({ isFloating }: PricingSectionProps) => {
           Precios
         </h2>
         <p className="reveal text-muted-foreground text-center mb-20">
-          Sin permanencia. Sin letra pequeña. Sin sorpresas.
+          Con dineros, caramelos.
         </p>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-6">
