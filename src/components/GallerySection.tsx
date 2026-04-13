@@ -5,12 +5,12 @@ interface GallerySectionProps {
 }
 
 const images = [
-  { aspect: "aspect-[4/5]", span: "" },
-  { aspect: "aspect-square", span: "" },
-  { aspect: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2" },
-  { aspect: "aspect-[5/4]", span: "md:col-span-2" },
-  { aspect: "aspect-square", span: "" },
-  { aspect: "aspect-[4/3]", span: "" },
+  { aspect: "aspect-[4/5]", span: "", overlay: "Esto es real." },
+  { aspect: "aspect-square", span: "", overlay: null },
+  { aspect: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", overlay: "Pásate luego." },
+  { aspect: "aspect-[5/4]", span: "md:col-span-2", overlay: null },
+  { aspect: "aspect-square", span: "", overlay: "Luego no sales." },
+  { aspect: "aspect-[4/3]", span: "", overlay: null },
 ];
 
 const GallerySection = ({ isFloating }: GallerySectionProps) => {
@@ -44,13 +44,20 @@ const GallerySection = ({ isFloating }: GallerySectionProps) => {
               className={`reveal ${img.span} ${img.aspect} bg-muted rounded-sm overflow-hidden relative group cursor-pointer gravity-layer-image ${f}`}
               style={{ transitionDelay: `${i * 0.08}s` }}
             >
-              {/* Placeholder */}
               <div className="absolute inset-0 bg-gradient-to-br from-muted to-muted/60" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="font-mono text-xs text-muted-foreground/50">IMG</span>
               </div>
-              {/* Neon overlay on hover */}
+              {/* Neon overlay */}
               <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500 mix-blend-multiply" />
+              {/* Hover text overlay */}
+              {img.overlay && (
+                <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="font-mono text-xs text-foreground/80 tracking-wider uppercase">
+                    {img.overlay}
+                  </span>
+                </div>
+              )}
             </div>
           ))}
         </div>

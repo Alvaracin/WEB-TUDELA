@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface LevelSystemProps {
   isFloating: boolean;
@@ -11,7 +12,6 @@ const levels = [
     line1: "Nunca has tocado un rocódromo.",
     line2: "Pero llevas 10 minutos mirando esta web.",
     color: "text-muted-foreground",
-    accent: "border-muted-foreground/30",
   },
   {
     id: 1,
@@ -19,7 +19,6 @@ const levels = [
     line1: "Vienes a probar.",
     line2: "Dices que es por curiosidad.",
     color: "text-accent",
-    accent: "border-accent/40",
   },
   {
     id: 2,
@@ -27,7 +26,6 @@ const levels = [
     line1: "Ya tienes pies de gato.",
     line2: "Y una excusa para venir 3 veces por semana.",
     color: "text-secondary",
-    accent: "border-secondary/40",
   },
   {
     id: 3,
@@ -35,86 +33,119 @@ const levels = [
     line1: "Te quejas del setting.",
     line2: "Luego repites el bloque.",
     color: "text-primary",
-    accent: "border-primary/40",
   },
 ];
 
 const LevelSystem = ({ isFloating }: LevelSystemProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [activeLevel, setActiveLevel] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragStartX = useRef(0);
+  const dragging = useRef(false);
   const f = isFloating ? "floating" : "";
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const rect = container.getBoundingClientRect();
-      const containerTop = -rect.top;
-      const containerHeight = container.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, containerTop / containerHeight));
-      const level = Math.min(3, Math.floor(progress * 4));
-      setActiveLevel(level);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+  const goTo = useCallback((idx: number) => {
+    setActiveLevel(Math.max(0, Math.min(3, idx)));
   }, []);
 
+  // Keyboard support
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") goTo(activeLevel + 1);
+      if (e.key === "ArrowLeft") goTo(activeLevel - 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeLevel, goTo]);
+
+  // Drag/swipe
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragging.current = true;
+    dragStartX.current = e.clientX;
+  };
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    const diff = e.clientX - dragStartX.current;
+    if (Math.abs(diff) > 50) {
+      goTo(activeLevel + (diff < 0 ? 1 : -1));
+    }
+  };
+
   return (
-    <section ref={containerRef} className="relative" style={{ height: "400vh" }} id="niveles">
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        <div className={`absolute inset-0 dotted-grid opacity-30 gravity-layer-grid ${f}`} />
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-6 w-full">
-          {/* Title */}
-          <h2 className={`font-mono text-lg md:text-xl text-muted-foreground mb-16 text-center gravity-layer-text ${f}`}>
-            ¿En qué nivel estás?
-          </h2>
+    <section className="py-32 px-6 relative overflow-hidden" id="niveles">
+      <div className="max-w-5xl mx-auto">
+        <h2 className={`font-mono text-lg md:text-xl text-muted-foreground mb-12 text-center gravity-layer-text ${f}`}>
+          ¿En qué nivel estás?
+        </h2>
 
-          {/* Progress indicator */}
-          <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2">
-            {levels.map((level) => (
-              <div
-                key={level.id}
-                className={`w-2 h-2 rounded-full transition-all duration-500 ${
-                  activeLevel >= level.id
-                    ? "bg-primary scale-125"
-                    : "bg-muted-foreground/30 scale-100"
-                }`}
-              />
-            ))}
-            <div
-              className="w-px bg-primary/50 transition-all duration-500"
-              style={{ height: `${(activeLevel / 3) * 60}px` }}
+        {/* Progress dots */}
+        <div className="flex justify-center gap-3 mb-12">
+          {levels.map((level) => (
+            <button
+              key={level.id}
+              onClick={() => goTo(level.id)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
+                activeLevel === level.id
+                  ? "bg-primary scale-150"
+                  : activeLevel > level.id
+                  ? "bg-primary/50"
+                  : "bg-muted-foreground/30"
+              }`}
             />
-          </div>
+          ))}
+        </div>
 
-          {/* Level content */}
-          <div className="text-center relative min-h-[200px] flex items-center justify-center">
+        {/* Slider track */}
+        <div
+          ref={trackRef}
+          className="relative touch-pan-y select-none cursor-grab active:cursor-grabbing"
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
+        >
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${activeLevel * 100}%)` }}
+          >
             {levels.map((level) => (
               <div
                 key={level.id}
-                className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ${
-                  activeLevel === level.id
-                    ? "opacity-100 translate-y-0"
-                    : activeLevel > level.id
-                    ? "opacity-0 -translate-y-8"
-                    : "opacity-0 translate-y-8"
-                }`}
+                className="min-w-full flex flex-col items-center justify-center text-center px-4 py-16"
               >
                 <span className={`font-mono text-sm ${level.color} mb-6 tracking-widest uppercase`}>
                   {level.label}
                 </span>
-                <p className={`font-mono text-xl md:text-3xl text-foreground mb-2 gravity-layer-text ${f}`}>
+                <p className={`font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-3 gravity-layer-text ${f} ${
+                  level.id === 3 && activeLevel === 3 ? "animate-glitch" : ""
+                }`}>
                   {level.line1}
                 </p>
-                <p className={`font-mono text-xl md:text-3xl ${level.color} gravity-layer-text ${f}`}>
+                <p className={`font-mono text-xl md:text-3xl lg:text-4xl ${level.color} gravity-layer-text ${f} ${
+                  level.id === 3 && activeLevel === 3 ? "animate-glitch" : ""
+                }`}>
                   {level.line2}
                 </p>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Arrow controls */}
+        <div className="flex justify-center gap-6 mt-8">
+          <button
+            onClick={() => goTo(activeLevel - 1)}
+            disabled={activeLevel === 0}
+            className="p-2 border border-border rounded-sm text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={() => goTo(activeLevel + 1)}
+            disabled={activeLevel === 3}
+            className="p-2 border border-border rounded-sm text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
     </section>

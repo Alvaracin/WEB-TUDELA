@@ -1,26 +1,45 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 
 interface NavbarProps {
   isFloating: boolean;
 }
 
+const links = [
+  { label: "Escalar", href: "#experiencia" },
+  { label: "Precios", href: "#precios" },
+  { label: "Qué pasa", href: "#comunidad" },
+  { label: "Ven", href: "#contacto" },
+];
+
 const Navbar = ({ isFloating }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      // Determine active section
+      const sections = links.map((l) => l.href.slice(1));
+      let current = "";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) current = `#${id}`;
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = [
-    { label: "Escalar", href: "#experiencia" },
-    { label: "Precios", href: "#precios" },
-    { label: "Qué pasa", href: "#comunidad" },
-    { label: "Ven", href: "#contacto" },
-  ];
+  const handleClick = useCallback((href: string) => {
+    setMenuOpen(false);
+  }, []);
 
   return (
     <>
@@ -39,9 +58,16 @@ const Navbar = ({ isFloating }: NavbarProps) => {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className={`relative font-mono text-sm transition-colors ${
+                  activeSection === link.href
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {link.label}
+                {activeSection === link.href && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full transition-all" />
+                )}
               </a>
             ))}
             <a
@@ -62,7 +88,6 @@ const Navbar = ({ isFloating }: NavbarProps) => {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center gap-8">
           <button
@@ -76,7 +101,7 @@ const Navbar = ({ isFloating }: NavbarProps) => {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => handleClick(link.href)}
               className="font-mono text-2xl text-foreground hover:text-primary transition-colors"
             >
               {link.label}
@@ -84,7 +109,7 @@ const Navbar = ({ isFloating }: NavbarProps) => {
           ))}
           <a
             href="#precios"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => handleClick("#precios")}
             className="font-mono text-lg px-8 py-3 bg-primary text-primary-foreground rounded-sm"
           >
             Hazte socio
