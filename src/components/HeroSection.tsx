@@ -1,3 +1,5 @@
+import logoGif from "@/assets/zeroglitch.gif";
+
 interface HeroSectionProps {
   isFloating: boolean;
   onPointerDown: () => void;
@@ -10,17 +12,17 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background gradient only — grid is global */}
       <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
 
-      {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <h1
-          className={`font-mono text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground mb-6 gravity-layer-text ${f}`}
-        >
-          ZER0 G
-        </h1>
+        <div className={`mb-6 gravity-layer-text ${f}`}>
+          <img
+            src={logoGif}
+            alt="ZER0 G"
+            className="h-20 md:h-28 lg:h-36 mx-auto"
+          />
+        </div>
         <p
           className={`font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-4 gravity-layer-text ${f}`}
           style={{ transitionDelay: isFloating ? "0.35s" : "0.1s" }}
@@ -49,7 +51,6 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
           </a>
         </div>
 
-        {/* Gravity trigger */}
         <div className="mt-16">
           <button
             onPointerDown={onPointerDown}
@@ -67,7 +68,6 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="w-px h-12 bg-gradient-to-b from-transparent to-muted-foreground/40" />
       </div>
