@@ -1,38 +1,25 @@
 
 
-# Plan Update — Two Changes
+# Fix Parallax Lag + Add Logo to Hero
 
-## 1. Gravity Test → Global Page Effect
+## Problem
+`ParallaxGrid` and `FloatingCircles` apply CSS `transition` to the entire `transform` property, including the scroll-driven parallax. This causes a sluggish, delayed response when scrolling. The transition should only apply during the gravity float interaction, not during normal scroll.
 
-**What changes:** Instead of an isolated `GravityTest.tsx` section, the gravity interaction becomes a **global state** managed at the `Index.tsx` level. A floating trigger button (or the hero area itself) activates it.
+## Changes
 
-**How it works:**
-- `Index.tsx` holds `isFloating` state via `onPointerDown`/`onPointerUp` on a trigger element in the hero
-- Pass `isFloating` as prop (or context) to every section component
-- Each section applies CSS transforms with **different intensities and speeds**:
-  - Navbar: `translateY(-2px)`, 200ms delay
-  - Hero text: `translateY(-8px)`, 300ms delay
-  - Grid texture: `translateY(-12px)`, 400ms delay (splits apart)
-  - Buttons: `translateY(-3px)`, 150ms delay
-  - Images: `translateY(-2px)`, 500ms delay (slower = parallax inversion)
-  - Cards: `translateY(-5px)`, 250ms delay
-- On release: `transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)` — slow, organic settle-back, not a snap
-- Different elements get different `transition-delay` values for staggered return
-- No dedicated section — the trigger lives in/near the hero, the effect is the whole page
+### 1. ParallaxGrid.tsx — Remove scroll transition lag
+- Remove the `transition-transform duration-[1s]` class and inline transition properties from the container
+- Instead, only apply a CSS transition when `isFloating` changes (use a separate state or conditional class)
+- Option: use `useRef` + `requestAnimationFrame` to directly set `transform` on the DOM element for scroll, bypassing React state entirely (smoothest approach)
+- Keep the gravity float offset with its eased transition by applying it as a separate CSS property or toggling a transition class only when `isFloating` changes
 
-## 2. Level System → Scroll-Driven Progression
+### 2. FloatingCircles.tsx — Same fix
+- Remove `transition-transform duration-700` from circle wrappers for scroll movement
+- Only apply transition when `isFloating` state changes
+- Same `useRef` + `requestAnimationFrame` approach for instant scroll response
 
-**What changes:** Remove tab/click navigation. Levels reveal as the user scrolls through a tall sticky container.
-
-**How it works:**
-- Container is ~400vh tall (one viewport per level)
-- Inner content is `position: sticky; top: 0` filling the viewport
-- Use `IntersectionObserver` or scroll position to detect which "level zone" the user is in
-- Active level transitions in with fade + subtle glitch effect
-- Previous levels stack/fade behind
-- Progress indicator on the side (vertical line or dots) showing Nivel 0–3
-- Feels like climbing through levels, not clicking tabs
-- Each level change triggers a subtle visual shift (accent color pulse, grid distortion)
-
-## Everything else from the previous plan remains unchanged.
+### 3. HeroSection.tsx — Replace "ZER0 G" text with uploaded logo
+- Copy `user-uploads://zeroglitch.gif` to `src/assets/zeroglitch.gif`
+- Replace the `<h1>ZER0 G</h1>` text with an `<img>` tag importing the GIF
+- Maintain the gravity floating class and sizing
 
