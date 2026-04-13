@@ -8,22 +8,22 @@ interface PricingSectionProps {
 const plans = [
   {
     name: "Sesión",
-    price: "XX €",
+    price: "9,5€",
     period: "día",
     features: ["Acceso al rocódromo", "Material no incluido"],
     highlighted: false,
   },
   {
     name: "Mensual",
-    price: "XX €",
+    price: "55€",
     period: "mes",
     features: ["Acceso ilimitado", "Zona de entrenamiento", "Eventos incluidos"],
     highlighted: true,
   },
   {
-    name: "Trimestral",
-    price: "XX €",
-    period: "3 meses",
+    name: "ANUAL",
+    price: "600€",
+    period: "12 meses",
     features: ["Acceso ilimitado", "Zona de entrenamiento", "Eventos incluidos", "Mejor precio"],
     highlighted: false,
   },
