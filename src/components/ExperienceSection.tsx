@@ -14,12 +14,12 @@ const experiences = [
   {
     icon: Dumbbell,
     title: "Entrenamiento",
-    desc: "Zona de entrenamiento específico. Campus, hangboard, y todo lo que necesitas para apretar.",
+    desc: "Zona de entrenamiento específico. Campus, hangboard, Moonboard a 40º y todo lo que necesitas para apretar.",
   },
   {
     icon: Users,
     title: "Comunidad",
-    desc: "Gente que escala, gente que empieza, gente que repite. Aquí todos caben.",
+    desc: "Gente que escala, gente que empieza, gente que repite. Aquí cabemos todxs.",
   },
   {
     icon: Calendar,

@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     q: "¿Puedo ir con niños?",
-    a: "Sí. Les va a gustar más que a ti. Aviso.",
+    a: "​¡Claro! Pero ten en cuenta que van a escalar mejor que tú.",
   },
 ];
 

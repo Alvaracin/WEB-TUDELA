@@ -32,7 +32,9 @@ const IntroSection = ({ isFloating }: IntroSectionProps) => {
           Necesitas empezar.
         </p>
         <p className={`text-muted-foreground text-base md:text-lg max-w-xl mx-auto gravity-layer-text ${f}`}>
-          Da igual si nunca has tocado una presa. Aquí todos empezamos igual: mirando la pared y pensando "¿por dónde?"
+          Da igual si nunca has tocado una presa.
+          <br />
+          Aquí todos empezamos igual: mirando la pared y pensando "¿por dónde?"
         </p>
       </div>
     </section>

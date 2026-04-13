@@ -41,8 +41,8 @@ const ContactSection = ({ isFloating }: ContactSectionProps) => {
               <Instagram size={20} className="text-primary flex-shrink-0 mt-1" />
               <div>
                 <p className="font-mono text-sm font-bold text-foreground">Instagram</p>
-                <a href="#" className="text-sm text-primary hover:text-primary/80 transition-colors">
-                  @zer0g_tudela
+                <a href="https://www.instagram.com/zerogescalada/" className="text-sm text-primary hover:text-primary/80 transition-colors">
+                  @zerogescalada
                 </a>
               </div>
             </div>
