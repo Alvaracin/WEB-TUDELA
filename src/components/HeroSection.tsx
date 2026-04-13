@@ -10,8 +10,8 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className={`absolute inset-0 bg-background dotted-grid gravity-layer-grid ${f}`} />
+      {/* Background gradient only — grid is global */}
+      <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
 
       {/* Content */}
