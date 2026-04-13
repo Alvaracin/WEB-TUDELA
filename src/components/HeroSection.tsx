@@ -20,7 +20,7 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
           <img
             src={logoGif}
             alt="ZER0 G"
-            className="h-20 md:h-28 lg:h-36 mx-auto"
+            className="h-32 md:h-44 lg:h-56 mx-auto"
           />
         </div>
         <p
