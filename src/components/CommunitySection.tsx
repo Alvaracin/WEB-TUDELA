@@ -38,8 +38,11 @@ const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
           <p className={`font-mono text-xl md:text-3xl text-foreground mb-2 gravity-layer-text ${f}`}>
             En el espacio nadie te oye gritar.
           </p>
-          <p className={`font-mono text-xl md:text-3xl text-primary gravity-layer-text ${f}`}>
-            En ZER0 G te miramos como caes.
+          <p className={`font-mono text-xl md:text-3xl text-primary mb-2 gravity-layer-text ${f}`}>
+            En ZER0 G te miramos cómo caes.
+          </p>
+          <p className={`font-mono text-xl md:text-3xl text-muted-foreground gravity-layer-text ${f}`}>
+            Y luego te explicamos por qué.
           </p>
         </div>
 
