@@ -22,9 +22,9 @@ const messages = [
 ];
 
 const colors = [
-  "hsl(338, 100%, 62%)",   // #FF3D8E
-  "hsl(72, 100%, 56%)",    // #D9FF00
-  "hsl(166, 82%, 56%)",    // #30EED0
+  "hsl(338, 100%, 62%)",
+  "hsl(72, 100%, 56%)",
+  "hsl(166, 82%, 56%)",
 ];
 
 const generateCircles = (): Circle[] => {
@@ -34,7 +34,7 @@ const generateCircles = (): Circle[] => {
     circles.push({
       id: i,
       x: 5 + Math.random() * 90,
-      y: 5 + Math.random() * 300, // spread across tall page
+      y: 5 + Math.random() * 300,
       size: 20 + Math.random() * 80,
       color: colors[i % colors.length],
       message: i % 3 === 0 ? messages[i % messages.length] : undefined,
@@ -50,15 +50,52 @@ interface FloatingCirclesProps {
 
 const FloatingCircles = ({ isFloating }: FloatingCirclesProps) => {
   const [circles] = useState(generateCircles);
-  const [scrollY, setScrollY] = useState(0);
   const [activeMessage, setActiveMessage] = useState<number | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const circleRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollRef = useRef(0);
+  const rafRef = useRef<number>();
+  const floatingRef = useRef(isFloating);
+
+  floatingRef.current = isFloating;
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
+    const update = () => {
+      circles.forEach((circle, i) => {
+        const el = circleRefs.current[i];
+        if (!el) return;
+        const parallaxY = scrollRef.current * circle.speed;
+        const floatOffset = floatingRef.current ? -(10 + circle.size * 0.15) : 0;
+        el.style.transform = `translateY(${-parallaxY + floatOffset}px)`;
+      });
+    };
+
+    const onScroll = () => {
+      scrollRef.current = window.scrollY;
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    scrollRef.current = window.scrollY;
+    update();
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [circles]);
+
+  // Re-run update when isFloating changes for gravity effect
+  useEffect(() => {
+    circles.forEach((circle, i) => {
+      const el = circleRefs.current[i];
+      if (!el) return;
+      const parallaxY = scrollRef.current * circle.speed;
+      const floatOffset = isFloating ? -(10 + circle.size * 0.15) : 0;
+      el.style.transform = `translateY(${-parallaxY + floatOffset}px)`;
+    });
+  }, [isFloating, circles]);
 
   const handleInteraction = useCallback((id: number, hasMessage: boolean) => {
     if (!hasMessage) return;
@@ -69,38 +106,32 @@ const FloatingCircles = ({ isFloating }: FloatingCirclesProps) => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden">
-      {circles.map((circle) => {
-        const parallaxY = scrollY * circle.speed;
-        const floatOffset = isFloating ? -(10 + circle.size * 0.15) : 0;
-
-        return (
+      {circles.map((circle, i) => (
+        <div
+          key={circle.id}
+          ref={(el) => { circleRefs.current[i] = el; }}
+          className={isFloating ? "absolute transition-transform duration-700" : "absolute"}
+          style={{
+            left: `${circle.x}%`,
+            top: `${circle.y}vh`,
+            width: circle.size,
+            height: circle.size,
+            transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
           <div
-            key={circle.id}
-            className="absolute transition-transform duration-700"
-            style={{
-              left: `${circle.x}%`,
-              top: `${circle.y}vh`,
-              width: circle.size,
-              height: circle.size,
-              transform: `translateY(${-parallaxY + floatOffset}px)`,
-              transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-              transitionDelay: isFloating ? "0.35s" : "0.15s",
-            }}
-          >
-            <div
-              className={`w-full h-full rounded-full opacity-20 hover:opacity-40 transition-opacity duration-500 ${circle.message ? "pointer-events-auto cursor-pointer" : ""}`}
-              style={{ backgroundColor: circle.color }}
-              onMouseEnter={() => handleInteraction(circle.id, !!circle.message)}
-              onTouchStart={() => handleInteraction(circle.id, !!circle.message)}
-            />
-            {circle.message && activeMessage === circle.id && (
-              <span className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] tracking-widest text-foreground/60 animate-fade-in">
-                {circle.message}
-              </span>
-            )}
-          </div>
-        );
-      })}
+            className={`w-full h-full rounded-full opacity-20 hover:opacity-40 transition-opacity duration-500 ${circle.message ? "pointer-events-auto cursor-pointer" : ""}`}
+            style={{ backgroundColor: circle.color }}
+            onMouseEnter={() => handleInteraction(circle.id, !!circle.message)}
+            onTouchStart={() => handleInteraction(circle.id, !!circle.message)}
+          />
+          {circle.message && activeMessage === circle.id && (
+            <span className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] tracking-widest text-foreground/60 animate-fade-in">
+              {circle.message}
+            </span>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
