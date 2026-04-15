@@ -7,45 +7,83 @@ interface HeroSectionProps {
   gravityTriggered: boolean;
 }
 
-const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered }: HeroSectionProps) => {
-  const f = isFloating ? "floating" : "";
+const LOGO_SHIFT = "-42vh";
+const TEXT_SHIFT = "calc(-42vh * 0.89)";
+const BUTTON_SHIFT = "calc(-42vh * 0.55)";
 
+const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <div className={`mb-6 gravity-layer-text ${f}`}>
+        {/* Logo — biggest movement, tilts 13deg */}
+        <div
+          className="mb-6"
+          style={{
+            transform: isFloating ? `translateY(${LOGO_SHIFT}) rotate(13deg)` : "translateY(0) rotate(0deg)",
+            transition: isFloating
+              ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0s"
+              : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s",
+          }}
+        >
           <img
             src={logoGif}
             alt="ZER0 G"
             className="h-32 md:h-44 lg:h-56 mx-auto"
           />
         </div>
+
+        {/* Main tagline — 89% of logo shift, tilts -8deg */}
         <p
-          className={`font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-4 gravity-layer-text ${f}`}
-          style={{ transitionDelay: isFloating ? "0.35s" : "0.1s" }}
+          className="font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-4"
+          style={{
+            transform: isFloating ? `translateY(${TEXT_SHIFT}) rotate(-8deg)` : "translateY(0) rotate(0deg)",
+            transition: isFloating
+              ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s"
+              : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s",
+          }}
         >
           La gravedad es opcional.
         </p>
+
+        {/* Subtitle — same as tagline */}
         <p
-          className={`text-base md:text-lg text-muted-foreground mb-10 max-w-xl mx-auto gravity-layer-text ${f}`}
-          style={{ transitionDelay: isFloating ? "0.4s" : "0.12s" }}
+          className="text-base md:text-lg text-muted-foreground mb-10 max-w-xl mx-auto"
+          style={{
+            transform: isFloating ? `translateY(${TEXT_SHIFT}) rotate(-8deg)` : "translateY(0) rotate(0deg)",
+            transition: isFloating
+              ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.18s"
+              : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.08s",
+          }}
         >
           Boulder en Tudela. Para el que empieza y para el que aprieta.
         </p>
 
-        <div className={`flex flex-col sm:flex-row gap-4 justify-center gravity-layer-button ${f}`}>
+        {/* Buttons — 55% of logo shift, staggered one by one */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#precios"
             className="font-mono text-sm px-8 py-3 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
+            style={{
+              transform: isFloating ? `translateY(${BUTTON_SHIFT})` : "translateY(0)",
+              transition: isFloating
+                ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.28s"
+                : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s",
+            }}
           >
             Hazte socio
           </a>
           <a
             href="#experiencia"
             className="font-mono text-sm px-8 py-3 border border-foreground/30 text-foreground rounded-sm hover:border-foreground/60 transition-colors"
+            style={{
+              transform: isFloating ? `translateY(${BUTTON_SHIFT})` : "translateY(0)",
+              transition: isFloating
+                ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.38s"
+                : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.12s",
+            }}
           >
             Explorar
           </a>
