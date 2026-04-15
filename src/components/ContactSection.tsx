@@ -11,7 +11,7 @@ const ContactSection = ({ isFloating }: ContactSectionProps) => {
     <section id="contacto" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <h2 className={`font-mono text-3xl md:text-4xl font-bold text-foreground mb-16 text-center gravity-layer-text ${f}`}>
-          Ven
+          Visítanos
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
