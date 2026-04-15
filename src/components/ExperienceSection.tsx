@@ -14,17 +14,17 @@ const experiences = [
   {
     icon: Dumbbell,
     title: "Entrenamiento",
-    desc: "Zona de entrenamiento específico. Campus, hangboard, Moonboard a 40º y todo lo que necesitas para apretar.",
+    desc: "Top 3 zonas de entrenamiento en Europa:\nCampus, hangboard, Moonboard a 40º, ¡quizá hasta mancuernas!",
   },
   {
     icon: Users,
     title: "Comunidad",
-    desc: "Gente que escala, gente que empieza, gente que repite. Aquí cabemos todxs.",
+    desc: "Gente que escala, gente que empieza, gente que repite.\nAquí cabemos todxs.",
   },
   {
     icon: Calendar,
     title: "Eventos",
-    desc: "Competiciones, quedadas, noches de boulder. Siempre pasa algo.",
+    desc: "Competiciones, quedadas, noches de boulder...\nSiempre pasa algo.",
   },
 ];
 
@@ -56,7 +56,7 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
           Qué vas a encontrar
         </h2>
         <p className={`reveal text-muted-foreground text-center mb-20 gravity-layer-text ${f}`}>
-          Escala fuerte. Y compórtate mejor.
+          {"\u200B"}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
