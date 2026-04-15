@@ -16,14 +16,14 @@ const faqs = [
   },
   {
     q: "¿Necesito experiencia previa?",
-    a: "Cero. Nada. Nula. Vienes, te explicamos, y empiezas.",
+    a: "Cero. Nada. Nula. Vienes, te explicamos, venga p'arriba.",
   },
   {
     q: "¿Qué necesito llevar?",
     a: "Ropa cómoda. Los pies de gato los puedes alquilar aquí. El magnesio también.",
   },
   {
-    q: "¿Qué es el boulder?",
+    q: "¿Qué es boulder?",
     a: "Escalada sin cuerdas sobre colchonetas. Bloques cortos, intensos, y adictivos. La pared no pasa de 4,5 metros.",
   },
   {
