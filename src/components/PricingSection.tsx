@@ -22,7 +22,7 @@ const plans = [
   },
   {
     name: "ANUAL",
-    price: "600€",
+    price: "500€",
     period: "12 meses",
     features: ["Acceso ilimitado", "Zona de entrenamiento", "Eventos incluidos", "Mejor precio"],
     highlighted: false,

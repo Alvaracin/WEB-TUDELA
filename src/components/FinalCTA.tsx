@@ -13,7 +13,7 @@ const FinalCTA = ({ isFloating }: FinalCTAProps) => {
           ¿Has llegado hasta aquí abajo?
         </p>
         <p className={`font-mono text-2xl md:text-4xl text-primary mb-12 gravity-layer-text ${f}`}>
-          Ven y te enseñamos a subir.
+          Ven. Te enseñamos a subir.
         </p>
         <a
           href="#precios"
