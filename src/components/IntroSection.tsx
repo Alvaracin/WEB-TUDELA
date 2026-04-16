@@ -25,10 +25,10 @@ const IntroSection = ({ isFloating }: IntroSectionProps) => {
   return (
     <section className="py-32 px-6">
       <div ref={ref} className="reveal max-w-3xl mx-auto text-center">
-        <p className={`font-mono text-2xl md:text-4xl text-foreground leading-relaxed mb-6 gravity-layer-text ${f}`}>
+        <p className={`font-mono text-3xl md:text-5xl lg:text-6xl text-foreground leading-[1.4] mb-8 gravity-layer-text ${f}`}>
           No necesitas ser fuerte.
         </p>
-        <p className={`font-mono text-2xl md:text-4xl text-primary leading-relaxed mb-10 gravity-layer-text ${f}`}>
+        <p className={`font-mono text-3xl md:text-5xl lg:text-6xl text-primary leading-[1.4] mb-12 gravity-layer-text ${f}`}>
           Necesitas empezar.
         </p>
         <p className={`text-muted-foreground text-base md:text-lg max-w-xl mx-auto gravity-layer-text ${f}`}>

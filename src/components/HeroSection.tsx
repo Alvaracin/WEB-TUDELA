@@ -37,7 +37,7 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
 
         {/* Main tagline — 89% of logo shift, tilts -8deg */}
         <p
-          className="font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-4"
+          className="font-mono text-2xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-[1.3]"
           style={{
             transform: isFloating ? `translateY(${TEXT_SHIFT}) rotate(-8deg)` : "translateY(0) rotate(0deg)",
             transition: isFloating

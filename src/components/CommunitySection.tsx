@@ -35,13 +35,13 @@ const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
     <section id="comunidad" className="py-32 px-6" ref={ref}>
       <div className="max-w-4xl mx-auto">
         <div className="reveal text-center mb-20">
-          <p className={`font-mono text-xl md:text-3xl text-foreground mb-2 gravity-layer-text ${f}`}>
+          <p className={`font-mono text-2xl md:text-4xl lg:text-5xl text-foreground mb-4 leading-[1.3] gravity-layer-text ${f}`}>
             En el espacio nadie te oye gritar.
           </p>
-          <p className={`font-mono text-xl md:text-3xl text-primary mb-2 gravity-layer-text ${f}`}>
+          <p className={`font-mono text-2xl md:text-4xl lg:text-5xl text-primary mb-4 leading-[1.3] gravity-layer-text ${f}`}>
             En ZER0 G te miramos cómo caes.
           </p>
-          <p className={`font-mono text-xl md:text-3xl text-muted-foreground gravity-layer-text ${f}`}>
+          <p className={`font-mono text-2xl md:text-4xl lg:text-5xl text-muted-foreground leading-[1.3] gravity-layer-text ${f}`}>
             Y luego te explicamos por qué.
           </p>
         </div>

@@ -14,6 +14,7 @@ import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import SubliminalInterruption from "@/components/SubliminalInterruption";
 
 const Index = () => {
   const [isFloating, setIsFloating] = useState(false);
@@ -44,6 +45,7 @@ const Index = () => {
         <LevelSystem isFloating={isFloating} />
         <ExperienceSection isFloating={isFloating} />
         <CultureSection isFloating={isFloating} />
+        <SubliminalInterruption />
         <PricingSection isFloating={isFloating} />
         <CommunitySection isFloating={isFloating} />
         <GallerySection isFloating={isFloating} />
