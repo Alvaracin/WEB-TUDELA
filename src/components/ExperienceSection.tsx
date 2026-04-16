@@ -52,7 +52,7 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
   return (
     <section id="experiencia" className="py-32 px-6" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <h2 className={`reveal font-mono md:text-6xl font-bold text-foreground mb-6 text-center gravity-layer-text ${f} text-3xl`}>
+        <h2 className={`reveal font-mono text-5xl font-bold text-foreground mb-6 text-center gravity-layer-text ${f}`}>
           Qué vas a encontrar
         </h2>
         <p className={`reveal text-muted-foreground text-center mb-20 gravity-layer-text ${f}`}>
@@ -80,12 +80,13 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
           ))}
         </div>
 
-        <p className={`reveal font-mono text-center text-foreground mt-16 text-base md:text-lg gravity-layer-text ${f}`}>
+        <p className={`reveal font-mono text-center text-foreground mt-16 text-3xl gravity-layer-text ${f} uppercase`}>
           Bloques nuevos cada semana.
-          <br />
-          <span className="text-primary">Si te los sabes todos, tenemos un problema.</span>
         </p>
-        <p className={`reveal font-mono text-center text-muted-foreground mt-6 text-sm md:text-base gravity-layer-text ${f}`}>
+        <p className={`reveal font-mono text-center text-primary mt-4 text-3xl gravity-layer-text ${f} font-semibold`}>
+          Si te los sabes todos, tenemos un problema.
+        </p>
+        <p className={`reveal font-mono text-center text-foreground mt-10 text-3xl gravity-layer-text ${f} uppercase`}>
           Si es fácil, está mal puesto.
         </p>
       </div>

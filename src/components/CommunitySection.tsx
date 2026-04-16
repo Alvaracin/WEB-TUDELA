@@ -35,18 +35,18 @@ const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
     <section id="comunidad" className="py-32 px-6" ref={ref}>
       <div className="max-w-4xl mx-auto">
         <div className="reveal text-center mb-20">
-          <p className={`font-mono text-2xl md:text-4xl lg:text-5xl text-foreground mb-4 leading-[1.3] gravity-layer-text ${f} font-medium`}>
+          <p className={`font-mono text-3xl md:text-3xl text-foreground mb-4 leading-[1.3] gravity-layer-text ${f} uppercase`}>
             En el espacio nadie te oye gritar.
           </p>
-          <p className={`font-mono text-2xl md:text-4xl lg:text-5xl text-primary mb-4 leading-[1.3] gravity-layer-text ${f} font-semibold`}>
+          <p className={`font-mono text-3xl md:text-3xl text-primary mb-4 leading-[1.3] gravity-layer-text ${f} font-semibold`}>
             EN ZER0 G TE MIRAMOS CÓMO CAES.
           </p>
-          <p className={`font-mono text-2xl md:text-4xl lg:text-5xl text-muted-foreground leading-[1.3] gravity-layer-text ${f}`}>
+          <p className={`font-mono text-3xl md:text-3xl text-muted-foreground leading-[1.3] gravity-layer-text ${f}`}>
             Y luego te explicamos por qué.
           </p>
         </div>
 
-        <h2 className={`reveal font-mono text-2xl md:text-3xl font-bold text-foreground mb-12 text-center gravity-layer-text ${f}`}>
+        <h2 className={`reveal font-mono text-5xl font-bold text-foreground mb-12 text-center gravity-layer-text ${f}`}>
           ¿Qué pasará en el futuro próximo?
         </h2>
 
