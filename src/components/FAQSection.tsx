@@ -42,7 +42,7 @@ const FAQSection = ({ isFloating }: FAQSectionProps) => {
   return (
     <section className="py-32 px-6">
       <div className="max-w-3xl mx-auto">
-        <h2 className={`font-mono text-3xl md:text-4xl font-bold text-foreground mb-16 text-center gravity-layer-text ${f}`}>
+        <h2 className={`font-mono text-5xl font-bold text-foreground mb-16 text-center gravity-layer-text ${f}`}>
           Preguntas frecuentes
         </h2>
 
