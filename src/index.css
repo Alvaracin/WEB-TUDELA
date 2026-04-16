@@ -106,6 +106,36 @@
   animation: glitch 0.4s ease-in-out 0.2s;
 }
 
+/* Subliminal interruption */
+@keyframes subliminal-in {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes glitch-flicker {
+  0% { opacity: 1; transform: translate(0) skewX(0deg); }
+  10% { opacity: 0.8; transform: translate(-3px, 1px) skewX(-2deg); }
+  20% { opacity: 1; transform: translate(2px, -1px) skewX(1deg); }
+  30% { opacity: 0.6; transform: translate(0) skewX(0deg); }
+  40% { opacity: 1; transform: translate(1px, 2px) skewX(-1deg); }
+  50% { opacity: 0.9; transform: translate(-1px, 0) skewX(2deg); }
+  60% { opacity: 1; transform: translate(0) skewX(0deg); }
+  70% { opacity: 0.7; transform: translate(2px, -1px) skewX(-1deg); }
+  80% { opacity: 1; transform: translate(-2px, 1px) skewX(1deg); }
+  90% { opacity: 0.8; transform: translate(0) skewX(0deg); }
+  100% { opacity: 0; transform: translate(0) skewX(0deg); }
+}
+
+.animate-subliminal {
+  animation: subliminal-in 0.35s ease-in-out forwards;
+}
+
+.animate-glitch-flicker {
+  animation: glitch-flicker 0.35s ease-in-out forwards;
+}
+
 /* Gravity floating classes - layered speeds */
 .gravity-layer-nav {
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
