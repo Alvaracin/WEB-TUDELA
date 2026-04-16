@@ -52,7 +52,7 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
   return (
     <section id="experiencia" className="py-32 px-6" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <h2 className={`reveal font-mono text-3xl md:text-5xl font-bold text-foreground mb-4 text-center gravity-layer-text ${f}`}>
+        <h2 className={`reveal font-mono text-4xl md:text-6xl font-bold text-foreground mb-6 text-center gravity-layer-text ${f}`}>
           Qué vas a encontrar
         </h2>
         <p className={`reveal text-muted-foreground text-center mb-20 gravity-layer-text ${f}`}>
