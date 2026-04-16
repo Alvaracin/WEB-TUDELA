@@ -7,7 +7,7 @@ interface GallerySectionProps {
 const images = [
   { aspect: "aspect-[4/5]", span: "", overlay: "Esto es real." },
   { aspect: "aspect-square", span: "", overlay: null },
-  { aspect: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", overlay: "Pásate luego." },
+  { aspect: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", overlay: "Menuda pasada escalar." },
   { aspect: "aspect-[5/4]", span: "md:col-span-2", overlay: null },
   { aspect: "aspect-square", span: "", overlay: "Luego no sales." },
   { aspect: "aspect-[4/3]", span: "", overlay: null },
