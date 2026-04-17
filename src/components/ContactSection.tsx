@@ -8,7 +8,7 @@ const ContactSection = ({ isFloating }: ContactSectionProps) => {
   const f = isFloating ? "floating" : "";
 
   return (
-    <section id="contacto" className="py-32 px-6">
+    <section id="contacto" className="py-32 px-6 bg-[hsl(166,82%,56%,0.08)]">
       <div className="max-w-5xl mx-auto">
         <h2 className={`font-mono text-5xl font-bold text-foreground mb-16 text-center gravity-layer-text ${f}`}>
           Visítanos

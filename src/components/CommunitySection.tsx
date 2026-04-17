@@ -32,7 +32,7 @@ const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
   const f = isFloating ? "floating" : "";
 
   return (
-    <section id="comunidad" className="py-32 px-6" ref={ref}>
+    <section id="comunidad" className="py-32 px-6 bg-[hsl(338,100%,62%,0.08)]" ref={ref}>
       <div className="max-w-4xl mx-auto">
         <div className="reveal text-center mb-20">
           <p className={`font-mono text-3xl md:text-3xl text-foreground mb-4 leading-[1.3] gravity-layer-text ${f} uppercase`}>
