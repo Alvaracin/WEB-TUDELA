@@ -22,9 +22,9 @@ const ContactSection = ({ isFloating }: ContactSectionProps) => {
               <div>
                 <p className="font-mono text-sm font-bold text-foreground">Dirección</p>
                 <p className="text-sm text-muted-foreground">
-                  Tudela, Navarra, España
+                  Tudela, Navarra
                   <br />
-                  <span className="text-muted-foreground/60">(Dirección exacta próximamente)</span>
+                  <span className="text-muted-foreground/60">(pol. Las Labradas)</span>
                 </p>
               </div>
             </div>
@@ -33,7 +33,7 @@ const ContactSection = ({ isFloating }: ContactSectionProps) => {
               <Mail size={20} className="text-primary flex-shrink-0 mt-1" />
               <div>
                 <p className="font-mono text-sm font-bold text-foreground">Contacto</p>
-                <p className="text-sm text-muted-foreground">hola@zer0g.es</p>
+                <p className="text-sm text-muted-foreground">aupa@zerogescalada.com</p>
               </div>
             </div>
 

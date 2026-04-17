@@ -7,7 +7,7 @@ interface CommunitySectionProps {
 const events = [
   { title: "Inauguración", date: "4 de septiembre", desc: "Música, bloques, y gente." },
   { title: "Sesión principiantes", date: "Sábados 10:00", desc: "Para los que acaban de aterrizar." },
-  { title: "Comp mensual", date: "Último sábado del mes", desc: "Compite. O anima. Las dos valen." },
+  { title: "Compe mensual", date: "Último sábado del mes", desc: "Compite. O anima. Las dos valen." },
 ];
 
 const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
