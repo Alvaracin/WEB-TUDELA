@@ -51,7 +51,7 @@ const PricingSection = ({ isFloating }: PricingSectionProps) => {
   const f = isFloating ? "floating" : "";
 
   return (
-    <section id="precios" className="py-32 px-6" ref={ref}>
+    <section id="precios" className="py-32 px-6 bg-[hsl(72,100%,56%,0.08)]" ref={ref}>
       <div className="max-w-5xl mx-auto">
         <h2 className={`reveal font-mono text-5xl font-bold text-foreground mb-4 text-center gravity-layer-text ${f}`}>
           Precios

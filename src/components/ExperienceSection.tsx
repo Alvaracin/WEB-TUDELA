@@ -50,7 +50,7 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
   const f = isFloating ? "floating" : "";
 
   return (
-    <section id="experiencia" className="py-32 px-6" ref={ref}>
+    <section id="experiencia" className="py-32 px-6 bg-[hsl(166,82%,56%,0.08)]" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <h2 className={`reveal font-mono text-5xl font-bold text-foreground mb-6 text-center gravity-layer-text ${f}`}>
           Qué vas a encontrar
