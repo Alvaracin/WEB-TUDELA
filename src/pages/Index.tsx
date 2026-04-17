@@ -41,17 +41,25 @@ const Index = () => {
           onPointerUp={handlePointerUp}
           gravityTriggered={gravityTriggered}
         />
-        <IntroSection isFloating={isFloating} />
-        <LevelSystem isFloating={isFloating} />
+        <div className="section-accent-cyan">
+          <IntroSection isFloating={isFloating} />
+          <LevelSystem isFloating={isFloating} />
+        </div>
         <ExperienceSection isFloating={isFloating} />
-        <CultureSection isFloating={isFloating} />
+        <div className="section-accent-cyan">
+          <CultureSection isFloating={isFloating} />
+        </div>
         <SubliminalInterruption />
         <PricingSection isFloating={isFloating} />
         <CommunitySection isFloating={isFloating} />
-        <GallerySection isFloating={isFloating} />
-        <FAQSection isFloating={isFloating} />
+        <div className="section-accent-pink">
+          <GallerySection isFloating={isFloating} />
+          <FAQSection isFloating={isFloating} />
+        </div>
         <ContactSection isFloating={isFloating} />
-        <FinalCTA isFloating={isFloating} />
+        <div className="section-accent-cyan">
+          <FinalCTA isFloating={isFloating} />
+        </div>
         <Footer />
       </div>
     </div>

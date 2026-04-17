@@ -208,6 +208,23 @@
   transform: translateY(0);
 }
 
+/* Section accent overrides — remap --primary so all text-primary/bg-primary/border-primary inside switch */
+.section-accent-cyan {
+  --primary: 166 82% 56%;
+  --primary-foreground: 0 1% 12%;
+  --ring: 166 82% 56%;
+}
+.section-accent-yellow {
+  --primary: 72 100% 56%;
+  --primary-foreground: 0 1% 12%;
+  --ring: 72 100% 56%;
+}
+.section-accent-pink {
+  --primary: 338 100% 62%;
+  --primary-foreground: 0 1% 12%;
+  --ring: 338 100% 62%;
+}
+
 /* Selection color */
 ::selection {
   background: hsl(338 100% 62% / 0.3);
