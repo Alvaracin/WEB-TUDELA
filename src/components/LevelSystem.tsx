@@ -1,6 +1,14 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+const GLITCH_CHARS = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`█▓▒░╳╱╲▲▼◆◇○●";
+const scrambleText = (target: string) =>
+  target
+    .split("")
+    .map((c) => (c === " " ? " " : GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]))
+    .join("");
+
+
 interface LevelSystemProps {
   isFloating: boolean;
 }
@@ -32,7 +40,7 @@ const levels = [
     label: "Nivel 3",
     line1: "Te quejas del setting.",
     line2: "Luego repites el bloque.",
-    color: "text-primary",
+    color: "text-[hsl(338,100%,62%)]",
   },
 ];
 
