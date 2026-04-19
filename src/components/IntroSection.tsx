@@ -28,13 +28,8 @@ const IntroSection = ({ isFloating }: IntroSectionProps) => {
         <p className={`font-mono text-3xl md:text-3xl text-foreground leading-[1.4] mb-8 gravity-layer-text ${f} uppercase`}>
           No necesitas ser fuerte.
         </p>
-        <p className={`font-mono text-3xl md:text-3xl text-primary leading-[1.4] mb-12 gravity-layer-text ${f} font-semibold`}>
+        <p className={`font-mono text-3xl md:text-3xl text-primary leading-[1.4] gravity-layer-text ${f} font-semibold`}>
           Necesitas empezar.
-        </p>
-        <p className={`text-muted-foreground text-base md:text-lg max-w-xl mx-auto gravity-layer-text ${f}`}>
-          Da igual si nunca has tocado una presa.
-          <br />
-          Aquí todos empezamos igual: mirando la pared y pensando "¿por dónde?"
         </p>
       </div>
     </section>
