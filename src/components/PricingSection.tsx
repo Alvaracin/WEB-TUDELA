@@ -86,7 +86,7 @@ const PricingSection = ({ isFloating }: PricingSectionProps) => {
                   <span className="font-mono text-3xl font-bold text-foreground">{plan.price}</span>
                   <span className="text-muted-foreground text-xs"> / {plan.period}</span>
                 </div>
-                <ul className="space-y-1 mb-4">
+                <ul className="space-y-1">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Check size={10} className="text-primary flex-shrink-0" />
@@ -94,16 +94,6 @@ const PricingSection = ({ isFloating }: PricingSectionProps) => {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="#"
-                  className={`font-mono text-xs px-5 py-2 rounded-full transition-colors ${
-                    plan.highlighted
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "border border-border text-foreground hover:border-foreground/40"
-                  }`}
-                >
-                  Elegir
-                </a>
               </div>
             </div>
           ))}

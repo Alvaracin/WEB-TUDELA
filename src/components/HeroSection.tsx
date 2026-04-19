@@ -58,7 +58,9 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
               : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.08s",
           }}
         >
-          Boulder en Tudela. Para el que empieza y para el que aprieta.
+          El primer boulder de Tudela y la Ribera.
+          <br />
+          Para el que empieza y para el que aprieta.
         </p>
 
         {/* Buttons — 55% of logo shift, staggered one by one */}

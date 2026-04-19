@@ -12,15 +12,9 @@ const FinalCTA = ({ isFloating }: FinalCTAProps) => {
         <p className={`font-mono text-3xl md:text-3xl text-foreground mb-6 leading-[1.3] gravity-layer-text ${f} uppercase`}>
           ¿HAS LLEGADO HASTA AQUÍ ABAJO, TÚ SOLX?
         </p>
-        <p className={`font-mono text-3xl md:text-3xl text-primary mb-14 leading-[1.3] gravity-layer-text ${f} font-semibold`}>
+        <p className={`font-mono text-3xl md:text-3xl text-primary leading-[1.3] gravity-layer-text ${f} font-semibold`}>
           Ven. Te enseñamos a subir.
         </p>
-        <a
-          href="#precios"
-          className={`inline-block font-mono text-base px-10 py-4 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors gravity-layer-button ${f}`}
-        >
-          Hazte socio
-        </a>
       </div>
     </section>
   );

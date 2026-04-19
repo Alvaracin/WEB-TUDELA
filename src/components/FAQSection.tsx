@@ -11,20 +11,20 @@ interface FAQSectionProps {
 
 const faqs = [
   {
+    q: "¿Boulder qué es?",
+    a: "Escalada sin cuerdas sobre colchonetas. Bloques cortos, intensos, y adictivos. La pared no pasa de 4,5 metros.",
+  },
+  {
     q: "¿Me voy a caer?",
-    a: "Sí. Y te va a encantar.",
+    a: "Casi seguro que sí. Pero te la vas a gozar.",
   },
   {
     q: "¿Necesito experiencia previa?",
-    a: "Cero. Nada. Nula. Vienes, te explicamos, venga p'arriba.",
+    a: "Cero. Nada. Nula. Vienes, te explicamos, y venga p'arriba.",
   },
   {
     q: "¿Qué necesito llevar?",
-    a: "Ropa cómoda. Los pies de gato los puedes alquilar aquí. El magnesio también.",
-  },
-  {
-    q: "¿Qué es boulder?",
-    a: "Escalada sin cuerdas sobre colchonetas. Bloques cortos, intensos, y adictivos. La pared no pasa de 4,5 metros.",
+    a: "Ropa cómoda. Los pies de gato los puedes alquilar aquí. Las ganas las pones tú.",
   },
   {
     q: "¿Hay clases?",

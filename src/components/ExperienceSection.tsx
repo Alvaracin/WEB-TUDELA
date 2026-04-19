@@ -86,9 +86,6 @@ const ExperienceSection = ({ isFloating }: ExperienceSectionProps) => {
         <p className={`reveal font-mono text-center text-primary mt-4 text-3xl gravity-layer-text ${f} font-semibold`}>
           Si te los sabes todos, tenemos un problema.
         </p>
-        <p className={`reveal font-mono text-center text-foreground mt-10 text-3xl gravity-layer-text ${f} uppercase`}>
-          Si es fácil, está mal puesto.
-        </p>
       </div>
     </section>
   );
