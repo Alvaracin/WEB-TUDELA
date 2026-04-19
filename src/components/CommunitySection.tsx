@@ -46,7 +46,7 @@ const CommunitySection = ({ isFloating }: CommunitySectionProps) => {
           </p>
         </div>
 
-        <h2 className={`reveal font-mono text-5xl font-bold text-foreground mb-12 text-center gravity-layer-text ${f}`}>
+        <h2 className={`reveal font-mono text-5xl font-bold text-foreground mb-12 text-center gravity-layer-text terminal-cursor ${f}`}>
           ¿Qué pasará en el futuro próximo?
         </h2>
 
