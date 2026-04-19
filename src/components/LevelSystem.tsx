@@ -46,10 +46,43 @@ const levels = [
 
 const LevelSystem = ({ isFloating }: LevelSystemProps) => {
   const [activeLevel, setActiveLevel] = useState(0);
+  const [glitchText, setGlitchText] = useState<{ line1: string; line2: string } | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragStartX = useRef(0);
   const dragging = useRef(false);
   const f = isFloating ? "floating" : "";
+
+  // Scramble effect for level 3
+  useEffect(() => {
+    if (activeLevel !== 3) {
+      setGlitchText(null);
+      return;
+    }
+    const target = levels[3];
+    const start = performance.now();
+    const duration = 300;
+    let raf: number;
+    const tick = (now: number) => {
+      const t = now - start;
+      if (t >= duration) {
+        setGlitchText(null);
+        return;
+      }
+      // progressively reveal real characters
+      const progress = t / duration;
+      const reveal = (str: string) =>
+        str
+          .split("")
+          .map((c, i) => (i / str.length < progress || c === " " ? c : GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]))
+          .join("");
+      setGlitchText({ line1: reveal(target.line1), line2: reveal(target.line2) });
+      raf = requestAnimationFrame(tick);
+    };
+    setGlitchText({ line1: scrambleText(target.line1), line2: scrambleText(target.line2) });
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [activeLevel]);
+
 
   const goTo = useCallback((idx: number) => {
     setActiveLevel(Math.max(0, Math.min(3, idx)));
@@ -123,15 +156,11 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
                 <span className={`font-mono text-sm ${level.color} mb-6 tracking-widest uppercase`}>
                   {level.label}
                 </span>
-                <p className={`font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-3 gravity-layer-text ${f} ${
-                  level.id === 3 && activeLevel === 3 ? "animate-glitch" : ""
-                }`}>
-                  {level.line1}
+                <p className={`font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-3 gravity-layer-text ${f}`}>
+                  {level.id === 3 && activeLevel === 3 && glitchText ? glitchText.line1 : level.line1}
                 </p>
-                <p className={`font-mono text-xl md:text-3xl lg:text-4xl ${level.color} gravity-layer-text ${f} ${
-                  level.id === 3 && activeLevel === 3 ? "animate-glitch" : ""
-                }`}>
-                  {level.line2}
+                <p className={`font-mono text-xl md:text-3xl lg:text-4xl ${level.color} gravity-layer-text ${f}`}>
+                  {level.id === 3 && activeLevel === 3 && glitchText ? glitchText.line2 : level.line2}
                 </p>
               </div>
             ))}
