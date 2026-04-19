@@ -230,3 +230,15 @@
   background: hsl(338 100% 62% / 0.3);
   color: hsl(0 0% 90%);
 }
+
+/* Terminal cursor blink */
+.terminal-cursor::after {
+  content: "_";
+  display: inline-block;
+  margin-left: 0.05em;
+  animation: terminal-blink 1s steps(2, start) infinite;
+  color: hsl(var(--primary));
+}
+@keyframes terminal-blink {
+  to { visibility: hidden; }
+}
