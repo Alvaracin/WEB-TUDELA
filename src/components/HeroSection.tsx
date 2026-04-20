@@ -66,7 +66,9 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
         {/* Buttons — 55% of logo shift, staggered one by one */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="#precios"
+            href="https://www.instagram.com/zerogescalada/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono text-sm px-8 py-3 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
             style={{
               transform: isFloating ? `translateY(${BUTTON_SHIFT})` : "translateY(0)",
@@ -75,7 +77,7 @@ const HeroSection = ({ isFloating, onPointerDown, onPointerUp, gravityTriggered 
                 : "transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s",
             }}
           >
-            Hazte socio
+            únete a la comunidad
           </a>
           <a
             href="#experiencia"
