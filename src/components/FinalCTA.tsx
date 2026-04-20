@@ -12,9 +12,17 @@ const FinalCTA = ({ isFloating }: FinalCTAProps) => {
         <p className={`font-mono text-3xl md:text-3xl text-foreground mb-6 leading-[1.3] gravity-layer-text ${f} uppercase`}>
           ¿HAS LLEGADO HASTA AQUÍ ABAJO, TÚ SOLX?
         </p>
-        <p className={`font-mono text-3xl md:text-3xl text-primary leading-[1.3] gravity-layer-text ${f} font-semibold`}>
+        <p className={`font-mono text-3xl md:text-3xl text-primary leading-[1.3] gravity-layer-text ${f} font-semibold mb-8`}>
           Ven. Te enseñamos a subir.
         </p>
+        <a
+          href="https://www.instagram.com/zerogescalada/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-sm px-8 py-3 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors inline-block"
+        >
+          Únete a la comunidad
+        </a>
       </div>
     </section>
   );
