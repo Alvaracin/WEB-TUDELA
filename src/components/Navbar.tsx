@@ -110,11 +110,13 @@ const Navbar = ({ isFloating }: NavbarProps) => {
             </a>
           ))}
           <a
-            href="#precios"
-            onClick={() => handleClick("#precios")}
+            href="https://www.instagram.com/zerogescalada/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => handleClick("https://www.instagram.com/zerogescalada/")}
             className="font-mono text-lg px-8 py-3 bg-primary text-primary-foreground rounded-sm"
           >
-            Hazte socio
+            Únete a la comunidad
           </a>
         </div>
       )}
