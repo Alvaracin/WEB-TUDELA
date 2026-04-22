@@ -7,7 +7,7 @@ interface NavbarProps {
 
 const links = [
   { label: "Escalar", href: "#experiencia" },
-  { label: "Precios", href: "#precios" },
+  { label: "Nivel Fundador", href: "#fundador" },
   { label: "Qué pasa", href: "#comunidad" },
   { label: "Ven", href: "#contacto" },
 ];

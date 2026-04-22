@@ -58,7 +58,7 @@ const levels = [
     label: "Nivel Final",
     line1: "Te puede el ansia.",
     line2: "Te haces socix fundadorx.",
-    color: "text-[hsl(210,100%,65%)]",
+    color: "text-[hsl(166,82%,56%)]",
     scrambleDuration: 800,
     scrambleRatio: 1,
   },
@@ -131,11 +131,7 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
   }, []);
 
   const handleDotClick = (id: number) => {
-    if (id === 4) {
-      triggerFinal();
-    } else {
-      goTo(id);
-    }
+    goTo(id);
   };
 
   // Keyboard support
@@ -198,7 +194,7 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
               className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
                 activeLevel === level.id
                   ? level.id === 4
-                    ? "bg-[hsl(210,100%,65%)] scale-150"
+                    ? "bg-[hsl(166,82%,56%)] scale-150"
                     : "bg-primary scale-150"
                   : activeLevel > level.id
                   ? "bg-primary/50"
@@ -238,7 +234,7 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
                 {level.id === 4 && activeLevel === 4 && (
                   <button
                     onClick={triggerFinal}
-                    className="mt-10 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-[hsl(210,100%,65%)] transition-colors"
+                    className="mt-10 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-[hsl(166,82%,56%)] transition-colors"
                   >
                     → Ver Nivel Fundador
                   </button>
@@ -258,14 +254,7 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
             <ChevronLeft size={20} />
           </button>
           <button
-            onClick={() => {
-              const next = activeLevel + 1;
-              if (next === 4) {
-                triggerFinal();
-              } else {
-                goTo(next);
-              }
-            }}
+            onClick={() => goTo(activeLevel + 1)}
             disabled={activeLevel === levels.length - 1}
             className="p-2 border border-border rounded-sm text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
           >
