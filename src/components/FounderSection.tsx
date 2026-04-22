@@ -6,7 +6,7 @@ const FounderSection = ({ isFloating }: FounderSectionProps) => {
   const f = isFloating ? "floating" : "";
 
   return (
-    <section id="fundador" className="section-accent-cyan py-32 px-6">
+    <section id="fundador" className="section-accent-yellow py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <h2
           className={`font-mono text-5xl font-bold text-foreground mb-16 text-center gravity-layer-text terminal-cursor ${f}`}
