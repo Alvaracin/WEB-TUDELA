@@ -1,16 +1,28 @@
 import { useEffect, useRef } from "react";
+import campus from "@/assets/gallery/campus.png";
+import dedos from "@/assets/gallery/dedos.png";
+import magnesio from "@/assets/gallery/magnesio.png";
+import masmagnesio from "@/assets/gallery/masmagnesio.png";
+import metepie from "@/assets/gallery/metepie.png";
+import paredes from "@/assets/gallery/paredes.png";
+import pies from "@/assets/gallery/pies.png";
+import pies2 from "@/assets/gallery/pies2.png";
+import sudor from "@/assets/gallery/sudor.png";
 
 interface GallerySectionProps {
   isFloating: boolean;
 }
 
 const images = [
-  { aspect: "aspect-[4/5]", span: "", overlay: "Esto es real." },
-  { aspect: "aspect-square", span: "", overlay: null },
-  { aspect: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", overlay: "Menuda pasada escalar." },
-  { aspect: "aspect-[5/4]", span: "md:col-span-2", overlay: null },
-  { aspect: "aspect-square", span: "", overlay: "Luego no sales." },
-  { aspect: "aspect-[4/3]", span: "", overlay: null },
+  { src: campus, alt: "Campus", aspect: "aspect-[4/5]", span: "", overlay: "Esto es real." },
+  { src: dedos, alt: "Dedos", aspect: "aspect-square", span: "", overlay: null },
+  { src: paredes, alt: "Paredes", aspect: "aspect-[3/4]", span: "md:col-span-1 md:row-span-2", overlay: "Menuda pasada escalar." },
+  { src: magnesio, alt: "Magnesio", aspect: "aspect-[5/4]", span: "md:col-span-2", overlay: null },
+  { src: pies, alt: "Pies", aspect: "aspect-square", span: "", overlay: "Luego no sales." },
+  { src: metepie, alt: "Mete pie", aspect: "aspect-[4/3]", span: "", overlay: null },
+  { src: sudor, alt: "Sudor", aspect: "aspect-[4/3]", span: "", overlay: null },
+  { src: pies2, alt: "Pies", aspect: "aspect-square", span: "", overlay: null },
+  { src: masmagnesio, alt: "Más magnesio", aspect: "aspect-[4/3]", span: "md:col-span-2", overlay: null },
 ];
 
 const GallerySection = ({ isFloating }: GallerySectionProps) => {
@@ -44,16 +56,18 @@ const GallerySection = ({ isFloating }: GallerySectionProps) => {
               className={`reveal ${img.span} ${img.aspect} bg-muted rounded-sm overflow-hidden relative group cursor-pointer gravity-layer-image ${f}`}
               style={{ transitionDelay: `${i * 0.08}s` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-muted to-muted/60" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-mono text-xs text-muted-foreground/50">IMG</span>
-              </div>
-              {/* Neon overlay */}
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500 mix-blend-multiply" />
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              {/* Black 8% overlay that disappears on hover */}
+              <div className="absolute inset-0 bg-black/[0.08] group-hover:bg-black/0 transition-colors duration-500 pointer-events-none" />
               {/* Hover text overlay */}
               {img.overlay && (
-                <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="font-mono text-xs text-foreground/80 tracking-wider uppercase">
+                <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <span className="font-mono text-xs text-foreground/90 tracking-wider uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {img.overlay}
                   </span>
                 </div>
