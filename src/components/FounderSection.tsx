@@ -18,8 +18,8 @@ const FounderSection = ({ isFloating }: FounderSectionProps) => {
           <div
             className={`group relative w-full max-w-3xl border-2 border-primary bg-card/40 backdrop-blur-sm rounded-sm p-12 md:p-20 text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_60px_-10px_hsl(var(--primary)/0.5)] gravity-layer-card ${f}`}
           >
-            <p className="font-mono text-2xl md:text-4xl text-foreground leading-relaxed mb-4">
-              Te gustaría saber qué es ésto de fundadores ¿eh?
+            <p className="font-mono text-2xl text-foreground leading-relaxed mb-4 md:text-3xl">
+              Te gustaría saber qué es esta vaina de nivel fundador ¿eh?
             </p>
             <p className="font-mono text-2xl md:text-4xl text-primary leading-relaxed">
               Pues te esperas hasta agosto.
