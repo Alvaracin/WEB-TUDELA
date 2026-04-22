@@ -2,12 +2,15 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const GLITCH_CHARS = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`█▓▒░╳╱╲▲▼◆◇○●";
-const scrambleText = (target: string) =>
+const scrambleText = (target: string, ratio = 1) =>
   target
     .split("")
-    .map((c) => (c === " " ? " " : GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]))
+    .map((c) => {
+      if (c === " ") return " ";
+      if (Math.random() > ratio) return c;
+      return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+    })
     .join("");
-
 
 interface LevelSystemProps {
   isFloating: boolean;
@@ -20,6 +23,8 @@ const levels = [
     line1: "Nunca has tocado un rocódromo.",
     line2: "Pero llevas 10 minutos mirando esta web.",
     color: "text-muted-foreground",
+    scrambleDuration: 0,
+    scrambleRatio: 0,
   },
   {
     id: 1,
@@ -27,6 +32,8 @@ const levels = [
     line1: "Vienes a probar.",
     line2: "Dices que es por curiosidad.",
     color: "text-accent",
+    scrambleDuration: 150,
+    scrambleRatio: 0.3,
   },
   {
     id: 2,
@@ -34,6 +41,8 @@ const levels = [
     line1: "Ya tienes pies de gato.",
     line2: "Y una excusa para venir 3 veces por semana.",
     color: "text-secondary",
+    scrambleDuration: 300,
+    scrambleRatio: 0.55,
   },
   {
     id: 3,
@@ -41,26 +50,39 @@ const levels = [
     line1: "Te quejas del setting.",
     line2: "Luego repites el bloque.",
     color: "text-[hsl(338,100%,62%)]",
+    scrambleDuration: 500,
+    scrambleRatio: 0.8,
+  },
+  {
+    id: 4,
+    label: "Nivel Final",
+    line1: "Te puede el ansia.",
+    line2: "Te haces socix fundadorx.",
+    color: "text-[hsl(210,100%,65%)]",
+    scrambleDuration: 800,
+    scrambleRatio: 1,
   },
 ];
 
 const LevelSystem = ({ isFloating }: LevelSystemProps) => {
   const [activeLevel, setActiveLevel] = useState(0);
-  const [glitchText, setGlitchText] = useState<{ line1: string; line2: string } | null>(null);
+  const [glitchText, setGlitchText] = useState<{ id: number; line1: string; line2: string } | null>(null);
+  const [showFlash, setShowFlash] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragStartX = useRef(0);
   const dragging = useRef(false);
   const f = isFloating ? "floating" : "";
 
-  // Scramble effect for level 3
+  // Scramble effect for any level (intensity scales with level)
   useEffect(() => {
-    if (activeLevel !== 3) {
+    const target = levels[activeLevel];
+    if (!target || target.scrambleDuration === 0) {
       setGlitchText(null);
       return;
     }
-    const target = levels[3];
     const start = performance.now();
-    const duration = 300;
+    const duration = target.scrambleDuration;
+    const baseRatio = target.scrambleRatio;
     let raf: number;
     const tick = (now: number) => {
       const t = now - start;
@@ -68,25 +90,53 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
         setGlitchText(null);
         return;
       }
-      // progressively reveal real characters
       const progress = t / duration;
+      // Reveal progressively, but allow ratio to dictate how many chars still flicker
       const reveal = (str: string) =>
         str
           .split("")
-          .map((c, i) => (i / str.length < progress || c === " " ? c : GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]))
+          .map((c, i) => {
+            if (c === " ") return " ";
+            if (i / str.length < progress) return c;
+            return Math.random() < baseRatio
+              ? GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
+              : c;
+          })
           .join("");
-      setGlitchText({ line1: reveal(target.line1), line2: reveal(target.line2) });
+      setGlitchText({ id: target.id, line1: reveal(target.line1), line2: reveal(target.line2) });
       raf = requestAnimationFrame(tick);
     };
-    setGlitchText({ line1: scrambleText(target.line1), line2: scrambleText(target.line2) });
+    setGlitchText({
+      id: target.id,
+      line1: scrambleText(target.line1, baseRatio),
+      line2: scrambleText(target.line2, baseRatio),
+    });
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [activeLevel]);
 
-
   const goTo = useCallback((idx: number) => {
-    setActiveLevel(Math.max(0, Math.min(3, idx)));
+    const clamped = Math.max(0, Math.min(levels.length - 1, idx));
+    setActiveLevel(clamped);
   }, []);
+
+  const triggerFinal = useCallback(() => {
+    setActiveLevel(4);
+    setShowFlash(true);
+    window.setTimeout(() => {
+      setShowFlash(false);
+      const el = document.getElementById("fundador");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 260);
+  }, []);
+
+  const handleDotClick = (id: number) => {
+    if (id === 4) {
+      triggerFinal();
+    } else {
+      goTo(id);
+    }
+  };
 
   // Keyboard support
   useEffect(() => {
@@ -112,8 +162,27 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
     }
   };
 
+  const renderLine = (level: typeof levels[number], lineKey: "line1" | "line2") => {
+    if (glitchText && glitchText.id === level.id && activeLevel === level.id) {
+      return glitchText[lineKey];
+    }
+    return level[lineKey];
+  };
+
   return (
     <section className="py-32 px-6 relative overflow-hidden" id="niveles">
+      {/* Micro-flash overlay */}
+      {showFlash && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center pointer-events-none">
+          <span
+            className="font-mono text-6xl md:text-8xl text-foreground"
+            style={{ animation: "subliminal-in 0.26s ease-in-out forwards" }}
+          >
+            Claro.
+          </span>
+        </div>
+      )}
+
       <div className="max-w-5xl mx-auto">
         <h2 className={`font-mono text-lg md:text-xl text-muted-foreground mb-12 text-center gravity-layer-text ${f}`}>
           ¿En qué nivel estás?
@@ -124,10 +193,13 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
           {levels.map((level) => (
             <button
               key={level.id}
-              onClick={() => goTo(level.id)}
+              onClick={() => handleDotClick(level.id)}
+              aria-label={level.label}
               className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
                 activeLevel === level.id
-                  ? "bg-primary scale-150"
+                  ? level.id === 4
+                    ? "bg-[hsl(210,100%,65%)] scale-150"
+                    : "bg-primary scale-150"
                   : activeLevel > level.id
                   ? "bg-primary/50"
                   : "bg-muted-foreground/30"
@@ -157,11 +229,20 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
                   {level.label}
                 </span>
                 <p className={`font-mono text-xl md:text-3xl lg:text-4xl text-foreground mb-3 gravity-layer-text ${f}`}>
-                  {level.id === 3 && activeLevel === 3 && glitchText ? glitchText.line1 : level.line1}
+                  {renderLine(level, "line1")}
                 </p>
                 <p className={`font-mono text-xl md:text-3xl lg:text-4xl ${level.color} gravity-layer-text ${f}`}>
-                  {level.id === 3 && activeLevel === 3 && glitchText ? glitchText.line2 : level.line2}
+                  {renderLine(level, "line2")}
                 </p>
+
+                {level.id === 4 && activeLevel === 4 && (
+                  <button
+                    onClick={triggerFinal}
+                    className="mt-10 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-[hsl(210,100%,65%)] transition-colors"
+                  >
+                    → Ver Nivel Fundador
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -177,8 +258,15 @@ const LevelSystem = ({ isFloating }: LevelSystemProps) => {
             <ChevronLeft size={20} />
           </button>
           <button
-            onClick={() => goTo(activeLevel + 1)}
-            disabled={activeLevel === 3}
+            onClick={() => {
+              const next = activeLevel + 1;
+              if (next === 4) {
+                triggerFinal();
+              } else {
+                goTo(next);
+              }
+            }}
+            disabled={activeLevel === levels.length - 1}
             className="p-2 border border-border rounded-sm text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
           >
             <ChevronRight size={20} />
