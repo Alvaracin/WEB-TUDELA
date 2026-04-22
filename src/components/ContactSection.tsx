@@ -48,9 +48,35 @@ const ContactSection = ({ isFloating }: ContactSectionProps) => {
             </div>
           </div>
 
-          {/* Map placeholder */}
-          <div className={`aspect-square bg-muted rounded-sm flex items-center justify-center gravity-layer-image ${f}`}>
-            <span className="font-mono text-xs text-muted-foreground/50">Google Maps</span>
+          {/* Map */}
+          <div className={`relative aspect-square rounded-sm overflow-hidden border border-border gravity-layer-image ${f}`}>
+            <iframe
+              title="ZER0 G — Tudela"
+              src="https://www.google.com/maps?q=Pol%C3%ADgono+Las+Labradas+Tudela+Navarra&hl=es&z=16&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 w-full h-full grayscale contrast-125 brightness-[0.55] invert-[0.92] hue-rotate-180 saturate-[0.4]"
+              style={{ border: 0 }}
+              allowFullScreen
+            />
+            {/* Tint overlay to blend with brand bg */}
+            <div className="pointer-events-none absolute inset-0 bg-background/20 mix-blend-multiply" />
+            {/* Custom marker */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="relative">
+                <div className="absolute inset-0 -m-3 rounded-full bg-primary/30 blur-md animate-pulse" />
+                <div className="relative w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_hsl(var(--primary))] ring-2 ring-background" />
+              </div>
+            </div>
+            {/* Open in maps */}
+            <a
+              href="https://maps.app.goo.gl/vvVfkxHHtxwwxUvf8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-3 right-3 font-mono text-[10px] uppercase tracking-widest bg-background/80 backdrop-blur px-3 py-1.5 rounded-sm text-foreground hover:text-primary transition-colors"
+            >
+              Abrir en Maps ↗
+            </a>
           </div>
         </div>
 

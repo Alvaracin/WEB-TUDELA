@@ -7,7 +7,7 @@ import IntroSection from "@/components/IntroSection";
 import LevelSystem from "@/components/LevelSystem";
 import ExperienceSection from "@/components/ExperienceSection";
 import CultureSection from "@/components/CultureSection";
-import PricingSection from "@/components/PricingSection";
+import FounderSection from "@/components/FounderSection";
 import CommunitySection from "@/components/CommunitySection";
 import GallerySection from "@/components/GallerySection";
 import FAQSection from "@/components/FAQSection";
@@ -50,7 +50,7 @@ const Index = () => {
           <CultureSection isFloating={isFloating} />
         </div>
         <SubliminalInterruption />
-        <PricingSection isFloating={isFloating} />
+        <FounderSection isFloating={isFloating} />
         <CommunitySection isFloating={isFloating} />
         <div className="section-accent-pink">
           <GallerySection isFloating={isFloating} />
